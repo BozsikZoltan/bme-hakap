@@ -1,0 +1,5 @@
+.idea
+.gitignore
+node_modules
+npm-debug.log
+dump.rdb

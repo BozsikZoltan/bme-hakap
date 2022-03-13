@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hakap-immutability-bad
+  labels:
+    app: hakap-immutability-bad
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hakap-immutability-bad
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: hakap-immutability-bad
+        tier: frontend
+    spec:
+      containers:
+      - name: hakap-immutability-bad
+        image: hakap-immutability-bad
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+
+---
+
+kind: Service
+apiVersion: v1
+
+metadata:
+  name: hakap-immutability-bad
+  labels:
+    app: hakap-immutability-bad
+    tier: frontend
+spec:
+  type: NodePort
+  selector: 
+    app: hakap-immutability-bad
+    tier: frontend
+  ports:
+    - nodePort: 30490
+      port: 8080
